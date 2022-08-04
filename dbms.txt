@@ -1,0 +1,3 @@
+A database is an oragnized collection of data that can be modified, retrieved or updated.
+
+DBMS is a collection of programm which helps to maintain and manipulate the database.
