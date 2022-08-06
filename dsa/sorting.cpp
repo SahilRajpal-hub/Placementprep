@@ -1,6 +1,9 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// *** All sorting algos implemented
+// ? https://leetcode.com/problems/sort-an-array/discuss/1401412/C%2B%2B-Clean-Code-Solution-or-Fastest-or-All-(15%2B)-Sorting-Methods-or-Detailed
+
 int cnt = 0;
 void printVector(vector<int> v);
 void merge(vector<int> &v, int s, int m, int e){

@@ -14,6 +14,8 @@
         "utility": "cpp",
         "variant": "cpp",
         "iostream": "cpp",
-        "cmath": "cpp"
+        "cmath": "cpp",
+        "map": "cpp",
+        "vector": "cpp"
     }
 }

@@ -706,6 +706,43 @@ int minDeletions(string s, int n)
 
 // TODO 7. Matrix Chain Multiplication (Only recursive and memoize work well in this type of question, top down causes confusion)
 //   * => Main Code
+int solve(int arr[], int i, int j, vector<vector<int>> &dp)
+{
+    if (i >= j)
+        return 0;
+    int ans = INT_MAX;
+    if (dp[i][j] != -1)
+        return dp[i][j];
+    for (int k = i; k < j; k++)
+    {
+        int t1 = 0, t2 = 0;
+        if (dp[i][k] != -1)
+            t1 = dp[i][k];
+        else
+            dp[i][k] = solve(arr, i, k, dp);
+        if (dp[k + 1][j] != -1)
+            t2 = dp[k + 1][j];
+        else
+            dp[k + 1][j] = solve(arr, k + 1, j, dp);
+        int temp = dp[i][k] + dp[k + 1][j] + arr[i - 1] * arr[k] * arr[j];
+        ans = min(ans, temp);
+    }
+    return ans;
+}
+int matrixMultiplication(int N, int arr[])
+{
+    vector<vector<int>> dp;
+    for (int i = 0; i <= N; i++)
+    {
+        vector<int> temp;
+        for (int j = 0; j <= N; j++)
+        {
+            temp.push_back(-1);
+        }
+        dp.push_back(temp);
+    }
+    return solve(arr, 1, N - 1, dp);
+}
 
 //   ? Printing MCM ->
 //   * => code
@@ -718,6 +755,59 @@ int minDeletions(string s, int n)
 
 //   ? Palindromic partitioning ->
 //   * => code
+bool isPalindrome(string s, int i, int j)
+{
+    if (i == j)
+        return true;
+    while (i < j)
+    {
+        if (s[i] != s[j])
+            return false;
+        i++;
+        j--;
+    }
+    return true;
+}
+int solve(string arr, int i, int j, vector<vector<int>> &dp)
+{
+    if (i >= j)
+        return 0;
+    int ans = INT_MAX;
+    if (isPalindrome(arr, i, j))
+        return 0;
+    if (dp[i][j] != -1)
+        return dp[i][j];
+    for (int k = i; k < j; k++)
+    {
+        int t1 = 0, t2 = 0;
+        if (dp[i][k] != -1)
+            t1 = dp[i][k];
+        else
+            dp[i][k] = solve(arr, i, k, dp);
+        if (dp[k + 1][j] != -1)
+            t2 = dp[k + 1][j];
+        else
+            dp[k + 1][j] = solve(arr, k + 1, j, dp);
+        int temp = dp[i][k] + dp[k + 1][j] + 1;
+        ans = min(ans, temp);
+    }
+    return ans;
+}
+int palindromicPartition(string str)
+{
+    int N = str.size();
+    vector<vector<int>> dp;
+    for (int i = 0; i <= N; i++)
+    {
+        vector<int> temp;
+        for (int j = 0; j <= N; j++)
+        {
+            temp.push_back(-1);
+        }
+        dp.push_back(temp);
+    }
+    return solve(str, 0, N - 1, dp);
+}
 
 //   ? Scramble String ->
 //   * => code
@@ -727,8 +817,6 @@ int minDeletions(string s, int n)
 
 //   ? Burst Balloons ->
 //   * => code
-
-
 
 // TODO 8. DP on trees
 
