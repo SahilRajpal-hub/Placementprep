@@ -242,7 +242,6 @@ int mah(vector<int> h)
     }
     return ans;
 }
-
 int maximalRectangle(vector<vector<char>> &matrix)
 {
     int r = matrix.size();

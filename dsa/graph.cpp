@@ -2,7 +2,6 @@
 using namespace std;
 
 // *** Breath first search
-// ! in gfg they ask for just connected component therefore it wont work there
 vector<int> bfsOfGraph(int V, vector<int> adj[])
 {
     vector<int> ans;
@@ -60,14 +59,14 @@ vector<int> dfsOfGraph(int V, vector<int> adj[])
 // *** cycle detection in undirected graph using bfs for connected as well as disconnected
 bool isCycle(int V, vector<int> adj[])
 {
-    queue<pair<int, int>> q;
-    vector<bool> visited(V + 1, false);
+    queue<pair<int, int>> q;             // ? queue will store {val,parent}
+    vector<bool> visited(V + 1, false);  
 
     for (int i = 0; i < V; i++)
     {
         if (!visited[i])
         {
-            q.push({i, -1});
+            q.push({i, -1});        // ? starting parent's node will have parent as -1
             visited[i] = true;
 
             while (!q.empty())
@@ -79,7 +78,7 @@ bool isCycle(int V, vector<int> adj[])
 
                 for (int v : adj[val])
                 {
-                    if (visited[v] && pr != v)
+                    if (visited[v] && pr != v)  // ? if visited but parent is not the current then it was visited by some other node ans hence the cycle
                         return true;
                     else if (!visited[v])
                     {
@@ -113,7 +112,6 @@ bool dfsHelper(vector<int> adj[], vector<bool> &visited, int s, int pr)
     }
     return false;
 }
-
 bool isCycle(int V, vector<int> adj[])
 {
     vector<bool> visited(V + 1, false);
@@ -132,6 +130,16 @@ bool isCycle(int V, vector<int> adj[])
 }
 
 // *** check if graph isBipartite using BFS
+/*
+A Bipartite Graph is a graph whose vertices can be divided into two independent sets, U and V such that every edge (u, v) either
+connects a vertex from U to V or a vertex from V to U. In other words, for every edge (u, v), either u belongs to U and v to V, 
+or u belongs to V and v to U. We can also say that there is no edge that connects vertices of same set.
+
+A bipartite graph is possible if the graph coloring is possible using two colors such that vertices in a set are colored with the same color. 
+
+Note that it is possible to color a cycle graph with even cycle using two colors. It is not possible to color a cycle graph with odd cycle using two colors. 
+
+*/
 bool isBipartite(vector<vector<int>> &graph)
 {
     vector<int> color(graph.size(), -1);
@@ -229,7 +237,6 @@ bool dfsHelper(vector<int> adj[], vector<bool> &visited, vector<bool> &dvisited,
     dvisited[s] = false;
     return false;
 }
-
 bool isCyclic(int V, vector<int> adj[])
 {
     vector<bool> visited(V + 1, false);

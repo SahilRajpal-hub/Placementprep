@@ -411,32 +411,28 @@ int solve(vector<int> &A, int B) {
 // *** find element in a sorted array that appears only once
 
 // *** allocate minimum number of pages
-int getSum(int A[], int n){
+bool isValid(int A[], int n, int m, int mx){
+    int nums = 1;
     int sum = 0;
     for(int i=0; i<n; i++){
         sum += A[i];
-    }
-    return sum;
-}   
-bool isValid(int A[], int N, int M, int maxSum){
-    int k = 1;
-    int sum = 0;
-    for(int i=0; i<N; i++){
-        sum += A[i];
-        if(sum>maxSum){
-            sum = A[i];
-            k++;
+        if(sum>mx){
+            sum = 0;
+            nums++;
+            if(nums>m || A[i]>mx){
+                return false;
+            }
+            i--;
         }
     }
-    return k>M?false:true;
-}   
+    return true;
+}
 int findPages(int A[], int N, int M) 
 {
     if(N<M) return -1;
-    int low = *max_element(A,A+N);
-    int high = getSum(A,N);
+    int low = 0;
+    int high = accumulate(A, A+N,0);
     int res = -1;
-    
     while(low<=high){
         int mid = low + (high-low)/2;
         if(isValid(A,N,M,mid)){
@@ -446,12 +442,90 @@ int findPages(int A[], int N, int M)
             low=mid+1;
         }
     }
-    
     return res;
 }
 
+// *** The Painter's Partition Problem
+bool isValid(int arr[], int n, int k, long long mid){
+    int numOfPainters = 1;
+    long long sum = 0;
+    for(int i=0; i<n; i++){
+        if(sum+arr[i]<=mid){
+            sum += arr[i];
+        }else{
+            sum=arr[i];
+            numOfPainters++;
+            if(numOfPainters>k || arr[i]>mid){
+                return false;
+            }
+        }
+    }
+    return true;
+}
+long long minTime(int arr[], int n, int k)
+{
+    int maxElement = INT_MIN;
+    long long sum = 0;
+    for(int i=0; i<n; i++){
+        sum += arr[i];
+        maxElement=max(maxElement,arr[i]);
+    }
+    if(n==k) return maxElement;
+    long long low = maxElement;
+    long long high = sum;
+    long long res = -1;
+    while(low<=high){
+        long long mid = low + (high-low)/2;
+        if(isValid(arr,n,k,mid)){
+            res=mid;
+            high=mid-1;
+        }else{
+            low=mid+1;
+        }
+    }
+    return res;
+}
 
+// *** aggresive cows
+bool isValid(vector<int> &stalls, int k, int mid, int n) {
+    int cowCount = 1;
+    int lastPos = stalls[0];
 
+    for(int i=0; i<n; i++ ){
+        
+        if(stalls[i]-lastPos >= mid){
+            cowCount++;
+            if(cowCount==k)
+            {
+                return true;
+            }
+            lastPos = stalls[i];
+        }
+    }
+    return false;
+    }
+int aggressiveCows(vector<int> &stalls, int k)
+{
+    sort(stalls.begin(), stalls.end());
+   	int start = 0;
+    int n = stalls.size();
+    int end=stalls[n-1];
+    int ans = -1;
+    
+    while(start<=end) {
+        int mid = start + (end-start)/2;
+        if(isValid(stalls, k, mid, n)) {
+            ans = mid;
+            start = mid + 1;
+        }
+        else
+        {
+            end = mid - 1;
+        }
+        
+    }
+    return ans;
+}
 
 int main(){
     int a = 2147483640;

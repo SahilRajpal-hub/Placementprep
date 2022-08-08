@@ -1,19 +1,29 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-bool isPalindrome(string s, int i, int j){
-    cout<<i<<" "<<j<<endl;
-    if(i==j) return true;
-    while(i<j){
-        cout<<s[i]<<" "<<s[j]<<endl;
-        if(s[i]!=s[j]) return false;
-        i++;j--;
+vector<vector<int>> mergeSimilarItems(vector<vector<int>> &items1, vector<vector<int>> &items2)
+{
+    map<int, int> mp;
+    for (auto item : items1)
+    {
+        mp[item[0]] += item[1];
     }
-    return true;
+    for (auto item : items2)
+    {
+        mp[item[0]] += item[1];
+    }
+    vector<vector<int>> ans;
+    for (auto it = mp.begin(); it != mp.end(); it++)
+    {
+        vector<int> temp;
+        temp[0] = it->first;
+        temp[0] = it->second;
+        ans.push_back(temp);
+    }
+    return ans;
 }
 
-int main(){
-    string s = "ababab";
-    cout<<isPalindrome(s,0,s.size()-1);
+int main()
+{
     return 0;
 }

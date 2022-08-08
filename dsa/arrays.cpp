@@ -751,6 +751,85 @@ int trap(vector<int> &height)
     return ans;
 }
 
+// *** Shortest Unsorted Continuous Subarray
+// ? TC -> O(NlogN)
+int findUnsortedSubarray(vector<int>& nums) {
+    vector<int> ga = nums;
+    sort(nums.begin(),nums.end());
+    int li=-1,ri=-1;
+    int n = nums.size();
+    for(int i=0; i<n; i++){
+        if(ga[i]!=nums[i]){
+            li=i;
+            break;
+        }
+    }
+    for(int i=n-1; i>=0; i--){
+        if(ga[i]!=nums[i]){
+            ri=i;
+            break;
+        }
+    }
+    if(li==ri) return 0;
+    return ri-li+1;
+}
+// ? TC -> O(N)
+int findUnsortedSubarray(vector<int>& nums) {
+    int mn=INT_MAX;
+    int mx=INT_MIN;
+    int n = nums.size();
+    
+    for(int i=0; i<n; i++){
+        if((i+1<n && nums[i]>nums[i+1]) || (i-1>=0 && nums[i]<nums[i-1])){
+            mn=min(mn,nums[i]);
+            mx=max(mx,nums[i]);
+        }
+    }
+    if(mn==INT_MAX && mx==INT_MIN) return 0;
+    int li=-1,ri=-1;
+    for(int i=0; i<n-1; i++){
+        if(nums[i]>mn){
+            li=i;
+            break;
+        }
+    }
+    for(int i=n-1; i>0; i--){
+        if(nums[i]<mx){
+            ri=i;
+            break;
+        }
+    }
+    return ri-li+1;
+}
+
+// *** Longest Consecutive Sequence
+int longestConsecutive(vector<int>& nums) {
+    map<int,int> mp;
+    for(int i=0; i<nums.size(); i++){
+        mp[nums[i]]++;
+    }
+    if(mp.size()==0) return 0;
+    
+    int prev = INT_MIN;
+    int best = 0;
+    int temp = 0;
+    for(auto it=mp.begin(); it!=mp.end(); it++){
+        if(prev==INT_MIN) prev=it->first;
+        else{
+            if(prev+1==it->first){
+                temp++;
+                best = max(best,temp);
+                prev=it->first;
+            }else{
+                temp=0;
+                prev=it->first;
+            }
+        }
+    }
+    return best+1;
+}
+
+
 int main()
 {
     // AMCAT ID ->
