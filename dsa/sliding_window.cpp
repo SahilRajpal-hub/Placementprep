@@ -140,10 +140,97 @@ vector<int> maxOfMin(int arr[], int n)
 
 // *** <------------------- Variable Size sliding window problems ------------------------------>
 // *** Largest/Smallest subarray of sum K
+// TODO -> For Positive Integers
+int lenOfLongSubarr(int A[],  int N, int k) 
+{ 
+    int i=0,j=0;
+    int sum = 0;
+    int ans = 0;
+    while(j<N){
+        if(sum<k){
+            sum += A[j];
+            j++;
+        }
+        else if(sum==k){
+            cout<<i<<" "<<j<<endl;
+            ans = max(ans,j-i);
+            sum -= A[i];
+            i++;
+        }
+        else if(sum>k){
+            sum -= A[i];
+            i++;
+        }
+    }
+    return ans;
+}
+// TODO -> For Negative Intergers <--- doesn't use sliding window approach --->
+int lenOfLongSubarr(int A[],  int N, int k) 
+{ 
+    int cs=0;
+    unordered_map<int,int> mp;
+    mp[0]=-1;
+    int ans = 0;
+    for(int i=0; i<N; i++){
+        cs += A[i];
+        if(mp.count(cs-k)>0){
+            ans = max(ans,i-mp[cs-k]);
+        }
+        if(mp.count(cs)==0){
+            mp[cs]=i;
+        }
+    }
+    return ans;
+} 
 
 // *** Largest substring of k distinct character
+int longestKSubstr(string s, int k) {
+    unordered_map<char,int> mp;
+    int i=0,j=0,n=s.size();
+    int ans = -1;
+    while(j<n){
+        mp[s[j]]++;
+        int sz = mp.size();
+        if(sz<k){
+            j++;
+        }else if(sz==k){
+            ans=max(ans,j-i+1);
+            j++;
+        }else if(sz>k){
+            while(mp.size()>k){
+                mp[s[i]]--;
+                if(mp[s[i]]==0) mp.erase(s[i]);
+                i++;
+            }
+            j++;
+        }
+    }
+    return ans;
+}
 
 // *** Length of largest substring of No repeating character
+int lengthOfLongestSubstring(string s) {
+    set<char> st;
+    int i=0,j=0,n=s.size();
+    int ans = 0;
+    while(j<n){
+        if(st.find(s[j])==st.end()){
+            st.insert(s[j]);
+            ans = max(ans,j-i+1);
+            j++;
+        }else{
+            while(i!=j && s[i]!=s[j]){
+                st.erase(s[i]);
+                i++;
+            }
+            st.erase(s[i++]);
+            st.insert(s[j]);
+            ans = max(ans,j-i+1);
+            j++;
+        }
+    }
+    return ans;
+}
 
 // *** Pick Toy
 

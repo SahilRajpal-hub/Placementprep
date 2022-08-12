@@ -9,16 +9,16 @@ using namespace std;
 int subarraySum(vector<int> &nums, int k)
 {
     map<int, int> mp;
-    int c = 0;
+    int cummulativeSum= 0;
     int ans = 0;
     mp[0] = 1;
 
     for (int i = 0; i < nums.size(); i++)
     {
-        c += nums[i];
-        if (mp.count(c - k) > 0)
-            ans += mp[c - k];
-        mp[c]++;
+        cummulativeSum+= nums[i];
+        if (mp.count(cummulativeSum- k) > 0)
+            ans += mp[cummulativeSum- k];
+        mp[cummulativeSum]++;
     }
 
     return ans;
