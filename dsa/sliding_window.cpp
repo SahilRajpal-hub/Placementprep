@@ -137,6 +137,37 @@ vector<int> maxOfMin(int arr[], int n)
     return wins;
 }
 
+// *** Substring with Concatenation of All Words
+bool contains(map<string,int> scount, string s, int ns){
+    map<string,int> mp;
+    for(int i=0; i<s.size(); i+=ns){
+        if(scount.count(s.substr(i,ns))==0) return false;
+        mp[s.substr(i,ns)]++;
+    }
+    return mp==scount;
+}
+vector<int> findSubstring(string s, vector<string>& words) {
+    map<string,int> scount;
+    for(int i=0; i<words.size(); i++){
+        scount[words[i]]++;
+    }
+    
+    int ws = words[0].size()*words.size();
+    if(s.size()<ws) return {};
+    int i=0,j=0;
+    vector<int> ans;
+    
+    for(int i=0; i<=s.size()-ws; i++){
+        cout<<i<<endl;
+        if(contains(scount,s.substr(i,ws),words[0].size())){
+            cout<<s.substr(i,ws)<<endl;
+            ans.push_back(i);
+        }
+    }
+    
+    return ans;
+}
+
 
 // *** <------------------- Variable Size sliding window problems ------------------------------>
 // *** Largest/Smallest subarray of sum K
@@ -235,6 +266,7 @@ int lengthOfLongestSubstring(string s) {
 // *** Pick Toy
 
 // *** Minimum window substring
+
 
 
 
