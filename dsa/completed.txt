@@ -1,0 +1,29 @@
+stack
+queue
+binary tree *
+graph -> bfs,dfs,topo,dijsktra
+recursion *
+heap
+binary search
+bit masking *
+greedy *
+sliding window -> fixed size
+sorting *
+
+
+
+<----------- TODO --------->
+Dynamic programming
+merge sort
+linked list
+backtracking
+sliding window -> fixed size
+two pointer -> https://leetcode.com/problems/subarray-sum-equals-k/discuss/301242/General-summary-of-what-kind-of-problem-can-cannot-solved-by-Two-Pointers
+2,3,k sum -> https://leetcode.com/problems/two-sum/discuss/737092/Sum-MegaPost-Python3-Solution-with-a-detailed-explanation
+trie
+segment trees 
+Monotic queue and stacks ->
+https://leetcode.com/problems/shortest-subarray-with-sum-at-least-k/discuss/204290/Monotonic-Queue-Summary
+https://leetcode.com/problems/sum-of-subarray-minimums/discuss/178876/stack-solution-with-very-detailed-explanation-step-by-step
+
+Backtracking -> https://leetcode.com/problems/permutations/discuss/18284/Backtrack-Summary:-General-Solution-for-10-Questionsh

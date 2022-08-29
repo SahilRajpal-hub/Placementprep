@@ -16,6 +16,7 @@
         "iostream": "cpp",
         "cmath": "cpp",
         "map": "cpp",
-        "vector": "cpp"
+        "vector": "cpp",
+        "string": "cpp"
     }
 }

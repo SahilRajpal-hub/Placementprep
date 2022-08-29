@@ -171,7 +171,7 @@ vector<int> findSubstring(string s, vector<string>& words) {
 
 // *** <------------------- Variable Size sliding window problems ------------------------------>
 // *** Largest/Smallest subarray of sum K
-// TODO -> For Positive Integers
+// TODO -> For Non Negative Integers
 int lenOfLongSubarr(int A[],  int N, int k) 
 { 
     int i=0,j=0;
@@ -183,7 +183,6 @@ int lenOfLongSubarr(int A[],  int N, int k)
             j++;
         }
         else if(sum==k){
-            cout<<i<<" "<<j<<endl;
             ans = max(ans,j-i);
             sum -= A[i];
             i++;
@@ -261,6 +260,26 @@ int lengthOfLongestSubstring(string s) {
         }
     }
     return ans;
+}
+
+
+// *** subarray with given sum
+vector<int> subarraySum(int arr[], int n, long long s)
+{
+    if(n==1) return {1,1};
+    if(s==0) return {-1};
+    int i=0,j=0;
+    long long sum=0;
+    while(j<=n){
+        if(sum<s){
+            sum += arr[j++];
+        }else if(sum==s){
+            return {i+1,j};
+        }else{
+            sum -= arr[i++];
+        }
+    }
+    return {-1};
 }
 
 // *** Pick Toy
