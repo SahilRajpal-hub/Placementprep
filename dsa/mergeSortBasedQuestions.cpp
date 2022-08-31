@@ -29,6 +29,9 @@ void mergeSort(vector<int> &v, int s, int e){
     merge(v,s,mid,e);
 }
 
+// *** merge sort in linked list
+// ?  <<---- availiable in linked list code file ------------>
+
 // *** count inversions
 int cnt = 0;
 void merge(vector<int> &v, int s, int m, int e)

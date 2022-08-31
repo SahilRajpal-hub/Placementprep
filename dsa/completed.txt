@@ -1,22 +1,24 @@
 stack
 queue
 binary tree *
+binary search tree *
 graph -> bfs,dfs,topo,dijsktra
 recursion *
 heap
 binary search
 bit masking *
-greedy *
+greedy
 sliding window -> fixed size
 sorting *
+linked list
+merge sort
 
 
 
 <----------- TODO --------->
 Dynamic programming
-merge sort
-linked list
 backtracking
+graph -> MST(prims, kruskal), Disjoint set
 sliding window -> fixed size
 two pointer -> https://leetcode.com/problems/subarray-sum-equals-k/discuss/301242/General-summary-of-what-kind-of-problem-can-cannot-solved-by-Two-Pointers
 2,3,k sum -> https://leetcode.com/problems/two-sum/discuss/737092/Sum-MegaPost-Python3-Solution-with-a-detailed-explanation

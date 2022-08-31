@@ -470,6 +470,26 @@ class Tree {
             
             return ans;
         }
+
+        // *** Sum of the Longest Bloodline of a Tree
+        int ans = 0;
+        int maxDist = 0;
+        void solve(Tree* root, int dist, int tmp){
+            if(root==NULL) return;
+            if(root->left==NULL && root->right==NULL){
+                if(dist+1>maxDist){
+                    ans = tmp+root->data;
+                    maxDist=dist+1;
+                }
+            }
+            if(root->right) solve(root->right,dist+1,tmp+root->data);
+            if(root->left) solve(root->left,dist+1,tmp+root->data);
+        }
+        int sumOfLongRootToLeafPath(Tree *root)
+        {
+            solve(root,0,0);
+            return ans;
+        }
 };
 
 int main(){
